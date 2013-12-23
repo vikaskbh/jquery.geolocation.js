@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>HTML5 Geolocation Google Maps Demo</title>
+	  <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #maparea { height: 100% }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8BUlX_bjyfV5uFY2voA2VTTLyA53P3Sg&sensor=false"></script>
+	  <script src="jquery.geolocation.js"></script> 
+    <script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#showLocationBtn').on('click',function(){
+
+			$.geolocation(function(lat,lng){
+				var myLatlng = new google.maps.LatLng(lat,lng);
+				var mapOptions = {
+				  center: new google.maps.LatLng(lat,lng),
+				  zoom: 8
+				};
+				var map = new google.maps.Map(document.getElementById("maparea"), mapOptions);
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title:"Your Location"
+				});
+			});
+		});
+	});
+	
+	</script>
+  </head>
+  <body>
+	<div>
+		<input type="button" value="Show my Location" id="showLocationBtn" style="padding:10px"/>
+		<br/>
+		<div id="maparea" style="height:300px;width:600px"></div>
+	</div>
+  </body>
+</html>
